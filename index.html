@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Mania</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+    </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="quiz-header-logo">
+    <h1><span class="quiz-text">QUIZ</span><span class="mania-text">Mania</span></h1>
+    <button id="exit-quiz-btn" class="exit-quiz-btn">Exit Quiz</button>
+  </div>
+  <div class="container">
+    <!-- Category Selection Page -->
+    <div id="category-page" class="page active">
+      <div class="welcome-section">
+        <h2>Welcome to <span class="quiz-text">QUIZ</span><span class="mania-text">Mania</span></h2>
+        <p class="subtitle">Please read all the rules about this quiz before you start.</p>
+        <a href="#" id="quiz-rules-link" class="quiz-rules-link">Quiz rules</a>
+      </div>
+
+      <form id="quiz-form" class="quiz-form">
+        <div class="form-group">
+          <label for="full-name">Full name</label>
+          <input type="text" id="full-name" placeholder="Full name" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Please select topic to continue</label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="javascript" name="category" value="javascript" checked>
+              <label for="javascript">Javascript Basic</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="react" name="category" value="react">
+              <label for="react">React.js Basic</label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="start-quiz-btn">Start Quiz</button>
+      </form>
+    </div>
+
+    <!-- Quiz Rules Modal -->
+    <div id="quiz-rules-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Quiz rules</h2>
+          <button id="close-modal" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="rule-section">
+            <h3>10-Second Timer</h3>
+            <ul>
+              <li>Each question comes with a 10-second timer.</li>
+              <li>If you don't answer within the time limit, the app will automatically move to the next question.</li>
+            </ul>
+          </div>
+
+          <div class="rule-section">
+            <h3>Manual Navigation</h3>
+            <ul>
+              <li>You can navigate to the next question manually before the timer expires.</li>
+              <li>Use the "Next" button to move ahead if you're ready before the timer runs out.</li>
+            </ul>
+          </div>
+
+          <div class="rule-section">
+            <h3>Final Score and Performance Message</h3>
+            <ul>
+              <li>After all questions are answered, your final score will be displayed.</li>
+              <li>Based on your performance, you will receive a personalized message:</li>
+              <ul class="sub-list">
+                <li>Great job!: If you score <strong>above 80%</strong>.</li>
+                <li>Well done!: If you score <strong>between 60% and 80%</strong>.</li>
+                <li>Keep practicing!: If you score <strong>below 60%</strong>.</li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quiz-page" class="page">
+      <div class="quiz-container">
+        <div class="quiz-header-section">
+          <!-- <div class="quiz-top-bar">
+            <div class="quiz-header-logo small">
+              <h1><span class="quiz-text">QUIZ</span><span class="mania-text">Mania</span></h1>
+            </div>
+            <button id="exit-quiz-btn" class="exit-quiz-btn">Exit Quiz</button>
+          </div> -->
+
+          <div class="quiz-progress-section">
+            <div class="progress-info">
+              <span id="question-progress">1 /10</span>
+            </div>
+            <div class="timer-display">
+              <span id="timer-display">0:10</span>
+            </div>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="quiz-content">
+          <div class="question-container">
+            <h2 id="question-text">Loading question...</h2>
+          </div>
+
+          <div class="options-container">
+            <div class="option" data-option="0">
+              <span class="option-letter">A</span>
+              <span class="option-text"></span>
+            </div>
+            <div class="option" data-option="1">
+              <span class="option-letter">B</span>
+              <span class="option-text"></span>
+            </div>
+            <div class="option" data-option="2">
+              <span class="option-letter">C</span>
+              <span class="option-text"></span>
+            </div>
+            <div class="option" data-option="3">
+              <span class="option-letter">D</span>
+              <span class="option-text"></span>
+            </div>
+          </div>
+
+          <div class="quiz-controls">
+            <button id="next-btn" class="btn btn-primary" disabled>Next</button>
+            <button id="skip-btn" class="btn btn-skip">Skip this question</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Page -->
+    <div id="results-page" class="page">
+      <div class="results-container">
+        <!-- Performance Icon -->
+        <div class="performance-icon" id="performance-icon">
+          <div class="success-icon">✓</div>
+        </div>
+
+        <!-- Main Title -->
+        <div class="results-title" id="results-title">
+          <h1>CONGRATULATION</h1>
+        </div>
+
+        <!-- Subtitle -->
+        <div class="results-subtitle" id="results-subtitle">
+          <p>You successfully completed the Quiz and holds</p>
+        </div>
+
+        <!-- Score Section -->
+        <div class="score-section" id="score-section">
+          <div class="score-label">Your Score</div>
+          <div class="score-display" id="score-display">
+            <span class="score-percentage" id="score-percentage">83%</span>
+          </div>
+          <div class="score-message" id="score-message">Great job!</div>
+        </div>
+
+        <!-- Results Details -->
+        <div class="results-details">
+          <div class="results-summary">
+            Out of <span id="total-questions">10</span> question
+          </div>
+          <div class="results-breakdown">
+            <div class="result-item">
+              <span class="result-number correct" id="correct-count">7</span>
+              <span class="result-label">Correct</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number incorrect" id="incorrect-count">2</span>
+              <span class="result-label">Incorrect</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number unanswered" id="unanswered-count">1</span>
+              <span class="result-label">Not answered</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="results-actions">
+          <button id="restart-btn" class="retake-btn">Retake Quiz</button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <script src="quiz-data.js"></script>
+  <script src="quiz-app.js"></script>
+</body>
+
+</html>
